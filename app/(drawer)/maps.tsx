@@ -1,0 +1,34 @@
+import { StyleSheet, Text, View } from "react-native";
+
+const Maps = () => {
+  return (
+    <View style={styles.container}>
+      <Text style={styles.title}>Maps & Geolocation</Text>
+      <Text style={styles.subtitle}>
+        Explore various map components, geolocation features, and location-based
+        services to create interactive user experiences.
+      </Text>
+    </View>
+  );
+};
+
+export default Maps;
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    padding: 20,
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: "bold",
+    marginBottom: 10,
+  },
+  subtitle: {
+    fontSize: 16,
+    textAlign: "center",
+    color: "#666",
+  },
+});
