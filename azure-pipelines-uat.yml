@@ -14,20 +14,24 @@ variables:
 
 steps:
   - checkout: self
+
   - task: NodeTool@0
     inputs:
       versionSpec: "20.x"
     displayName: "Use Node.js 20"
 
-  - script: npm ci
-    displayName: "Install dependencies"
-
   - script: |
-      npx eas --version
+      node -v
+      npm -v
+      npm ci
+      npm i -g eas-cli
+      eas --version
+
       echo "Trigger Android UAT..."
-      npx eas build --platform android --profile uat --non-interactive --no-wait
+      eas build --platform android --profile uat --non-interactive --no-wait
+
       echo "Trigger iOS UAT..."
-      npx eas build --platform ios --profile uat --non-interactive --no-wait
+      eas build --platform ios --profile uat --non-interactive --no-wait
     displayName: "Trigger EAS UAT builds"
     env:
       EXPO_TOKEN: $(EXPO_TOKEN)
