@@ -16,7 +16,7 @@ stages:
       - job: android_prod
         displayName: "Android Production (AAB)"
         pool:
-          vmImage: "ubuntu-latest"
+          vmImage: "macOs"
         steps:
           - checkout: self
           - task: NodeTool@0
