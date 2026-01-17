@@ -15,8 +15,6 @@ import "react-native-reanimated";
 function NavThemeBridge({ children }: { children: React.ReactNode }) {
   const { theme } = useAnimatedTheme();
   const base = theme.dark ? DarkTheme : DefaultTheme;
-
-  // Keep fonts intact by extending base theme
   const navTheme = {
     ...base,
     colors: {
