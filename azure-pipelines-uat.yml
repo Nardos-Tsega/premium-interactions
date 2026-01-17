@@ -1,0 +1,52 @@
+trigger:
+  branches:
+    include: ["uat"]
+
+pr:
+  branches:
+    include: ["uat"]
+
+variables:
+  - group: expo-uat-secrets
+
+stages:
+  - stage: UAT
+    displayName: "UAT Builds"
+    jobs:
+      - job: android_uat
+        displayName: "Android UAT (APK)"
+        pool:
+          vmImage: "ubuntu-latest"
+        steps:
+          - checkout: self
+          - task: NodeTool@0
+            inputs:
+              versionSpec: "20.x"
+            displayName: "Use Node.js 20"
+          - script: npm ci
+            displayName: "Install dependencies"
+          - script: |
+              npx eas --version
+              npx eas build --platform android --profile uat --non-interactive --no-wait
+            displayName: "EAS Build Android (UAT)"
+            env:
+              EXPO_TOKEN: $(EXPO_TOKEN)
+
+      - job: ios_uat
+        displayName: "iOS UAT"
+        pool:
+          vmImage: "macos-latest"
+        steps:
+          - checkout: self
+          - task: NodeTool@0
+            inputs:
+              versionSpec: "20.x"
+            displayName: "Use Node.js 20"
+          - script: npm ci
+            displayName: "Install dependencies"
+          - script: |
+              npx eas --version
+              npx eas build --platform ios --profile uat --non-interactive --no-wait
+            displayName: "EAS Build iOS (UAT)"
+            env:
+              EXPO_TOKEN: $(EXPO_TOKEN)
