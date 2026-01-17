@@ -29,9 +29,6 @@ steps:
 
       echo "Trigger Android UAT..."
       eas build --platform android --profile uat --non-interactive --no-wait
-
-      echo "Trigger iOS UAT..."
-      eas build --platform ios --profile uat --non-interactive --no-wait
-    displayName: "Trigger EAS UAT builds"
+    displayName: "Trigger EAS Android UAT build"
     env:
       EXPO_TOKEN: $(EXPO_TOKEN)
